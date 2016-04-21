@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript task18</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            padding: 10px;
+        }
+        #display li{
+            list-style: none;
+            float: left;
+            background-color: orange;
+            margin: 5px;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<input type="text" id="text"/>
+<button type="button" id="left-in">左侧入</button>
+<button type="button" id="right-in">右侧入</button>
+<button type="button" id="left-out">左侧出</button>
+<button type="button" id="right-out">右侧出</button>
+<ul id="display"></ul>
+
+<script type="text/javascript">
+    var text=document.getElementById("text");
+    var leftIn = document.getElementById("left-in");
+    var leftOut = document.getElementById("left-out");
+    var rightIn = document.getElementById("right-in");
+    var rightOut = document.getElementById("right-out");
+    var display = document.getElementById("display");
+    leftIn.addEventListener("click",function(){
+        var content=text.value.trim();
+        if(!content.match(/^\d+$/)){
+            alert("请输入数字");
+            return;
+        }
+        var li=document.createElement("li");
+        li.innerHTML=content;
+        display.insertBefore(li,display.firstElementChild );
+        text.value="";
+    });
+    rightIn.addEventListener("click",function(){
+        var content=text.value.trim();
+        if(!content.match(/^\d+$/)){
+            alert("请输入数字");
+            return;
+        }
+        var li=document.createElement("li");
+        li.innerHTML=content;
+        display.appendChild(li);
+        text.value="";
+    });
+    leftOut.addEventListener("click",function(){
+        alert(display.firstElementChild.innerText);
+        display.removeChild(display.firstElementChild);
+    });
+    rightOut.addEventListener("click",function(){
+        alert(display.lastElementChild.innerText);
+        display.removeChild(display.lastElementChild);
+    });
+    display.addEventListener("click",function(e){
+        display.removeChild(e.target);
+    });
+</script>
+</body>
+</html>
